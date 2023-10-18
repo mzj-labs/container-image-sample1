@@ -5,7 +5,10 @@ phases:
     commands:
       - echo PreBuild started on `date`
       - echo set Environment
-      - [[ -z "$IMAGE_TAG" ]] && export IMAGE_TAG=`echo $CODEBUILD_WEBHOOK_HEAD_REF | rev | cut -d'/' -f1 | rev`
+      - |
+        if [ -z "$IMAGE_TAG" ] then
+          export IMAGE_TAG=`echo $CODEBUILD_WEBHOOK_HEAD_REF | rev | cut -d'/' -f1 | rev`
+        fi
       - echo CODEBUILD_WEBHOOK_HEAD_REF: $CODEBUILD_WEBHOOK_HEAD_REF
       - echo AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
       - echo AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
