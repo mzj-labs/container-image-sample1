@@ -19,5 +19,5 @@ phases:
     commands:
       - echo PostBuild started on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
+      - sh buildspec.docker-push.sh
       - echo PostBuild completed on `date`
