@@ -6,5 +6,6 @@ fi
 if [ -z "$IMAGE_TAG" ]; then
   export IMAGE_TAG="latest"
 fi
+cat ~/.docker/config.json
 echo docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
 docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
