@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -z "$CODEBUILD_WEBHOOK_HEAD_REF" ]; then
+  export IMAGE_TAG=`echo $CODEBUILD_WEBHOOK_HEAD_REF | rev | cut -d'/' -f1 | rev`
+fi
+if [ -z "$IMAGE_TAG" ]; then
+  export IMAGE_TAG="latest"
+fi
+echo CODEBUILD_WEBHOOK_HEAD_REF $CODEBUILD_WEBHOOK_HEAD_REF
+echo AWS_DEFAULT_REGION $AWS_DEFAULT_REGION
+echo AWS_ACCOUNT_ID $AWS_ACCOUNT_ID
+echo IMAGE_REPO_NAME $IMAGE_REPO_NAME
+echo IMAGE_TAG $IMAGE_TAG
+echo Logging in to Amazon ECR...
+docker build -t $IMAGE_REPO_NAME .
+echo "docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG"
+docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
