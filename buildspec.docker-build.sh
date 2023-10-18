@@ -12,6 +12,6 @@ echo AWS_ACCOUNT_ID $AWS_ACCOUNT_ID
 echo IMAGE_REPO_NAME $IMAGE_REPO_NAME
 echo IMAGE_TAG $IMAGE_TAG
 echo Logging in to Amazon ECR...
-docker build -t $IMAGE_REPO_NAME .
+docker build --build-arg AWS_ID=$AWS_ACCOUNT_ID -t $IMAGE_REPO_NAME .
 echo "docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG"
 docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG

@@ -1,4 +1,6 @@
-FROM 442528770294.dkr.ecr.us-east-1.amazonaws.com/golang:1.20.4
+ARG AWS_ID
+
+FROM ${AWS_ID}.dkr.ecr.us-east-1.amazonaws.com/golang:1.20.4
 
 ENV WORK_DIR /opt/env-leaker
 
