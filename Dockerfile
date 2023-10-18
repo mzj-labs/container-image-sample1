@@ -1,4 +1,4 @@
-FROM golang:1.20.4
+FROM 442528770294.dkr.ecr.us-east-1.amazonaws.com/golang:1.20.4
 
 ENV WORK_DIR /opt/env-leaker
 
