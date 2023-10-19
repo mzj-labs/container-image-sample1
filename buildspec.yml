@@ -6,7 +6,7 @@ phases:
       - echo PreBuild started on `date`
       - echo set Environment
       - |
-        if [ -z "$CODEBUILD_WEBHOOK_HEAD_REF" ]; then
+        if [ -n "$CODEBUILD_WEBHOOK_HEAD_REF" ]; then
           export IMAGE_TAG=`echo $CODEBUILD_WEBHOOK_HEAD_REF | rev | cut -d'/' -f1 | rev`
         fi
       - |
@@ -14,6 +14,7 @@ phases:
           export IMAGE_TAG="latest"
         fi
       - echo "CODEBUILD_WEBHOOK_HEAD_REF; " $CODEBUILD_WEBHOOK_HEAD_REF
+      - echo "IMAGE_TAG; " $IMAGE_TAG
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - echo PreBuild completed on `date`
