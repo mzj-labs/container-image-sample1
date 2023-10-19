@@ -13,7 +13,6 @@ phases:
         if [ -z "$IMAGE_TAG" ]; then
           export IMAGE_TAG="latest"
         fi
-      - echo "CODEBUILD_WEBHOOK_HEAD_REF; " $CODEBUILD_WEBHOOK_HEAD_REF
       - echo "IMAGE_TAG; " $IMAGE_TAG
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
